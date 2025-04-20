@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@stitches/react": "^1.2.8",
     "04-ignite-shop": "file:",
     "next": "15.3.1",
     "react": "^19.0.0",

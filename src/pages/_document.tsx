@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import { getCssText } from "../styles/index";
 
 export default function Document() {
   return (
@@ -13,6 +14,10 @@ export default function Document() {
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap"
           rel="stylesheet"
+        />
+        <style
+          id="stitches"
+          dangerouslySetInnerHTML={{ __html: getCssText() }}
         />
       </Head>
       <body className="antialiased">
