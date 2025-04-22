@@ -1,3 +1,5 @@
 //getServerSideProps = renderizar algo no lado do servidor node.js. A pág. só será carregada assim que todas as requisições feitas no getServerSideProps finalizarem, até então, nada será carregado no front.
 
+//GetStaticProps = Cria uma versão estática (cache) da página, cria o cache para que não sejam feitas requisições toda vez que o usuário acessar a página, por exemplo, igual ao que acontece no getServerSideProps. Usamos o "revalidade" para definir a cada quantos segundos será criado um novo cache da página com os dados atualizados
+
 //BlurHash = mostra um blur da imagem enquanto a imagem original (mais pesada) está sendo carregada.
