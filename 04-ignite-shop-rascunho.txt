@@ -1,0 +1,3 @@
+//getServerSideProps = renderizar algo no lado do servidor node.js. A pág. só será carregada assim que todas as requisições feitas no getServerSideProps finalizarem, até então, nada será carregado no front.
+
+//BlurHash = mostra um blur da imagem enquanto a imagem original (mais pesada) está sendo carregada.
