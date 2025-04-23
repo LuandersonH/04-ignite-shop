@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { GetServerSideProps, GetStaticProps } from "next";
+import Link from "next/link";
 
 import { stripe } from "../lib/stripe";
 import { useKeenSlider } from "keen-slider/react";
@@ -27,14 +28,15 @@ export default function Home({ products }: HomeProps) {
     <HomeContainer ref={sliderRef}>
       {products.map((product) => {
         return (
-          <Product className="keen-slider__slide" key={product.id}>
-            <Image src={product.imageUrl} alt="" width={520} height={480} />
-
-            <footer>
-              <strong>{product.name}</strong>
-              <span>{product.price}</span>
-            </footer>
-          </Product>
+          <Link key={product.id} href={`/product/${product.id}`}>
+            <Product className="keen-slider__slide">
+              <Image src={product.imageUrl} alt="" width={520} height={480} />
+              <footer>
+                <strong>{product.name}</strong>
+                <span>{product.price}</span>
+              </footer>
+            </Product>
+          </Link>
         );
       })}
     </HomeContainer>
@@ -53,7 +55,10 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
-      price: price.unit_amount! / 100,
+      price: new Intl.NumberFormat("pt-br", {
+        style: "currency",
+        currency: "BRL",
+      }).format(price.unit_amount! / 100),
     };
   });
 
@@ -61,5 +66,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       products,
     },
+    revalidate: 60 * 60 * 2, //2 hours
   };
 };

@@ -3,3 +3,5 @@
 //GetStaticProps = Cria uma versão estática (cache) da página, cria o cache para que não sejam feitas requisições toda vez que o usuário acessar a página, por exemplo, igual ao que acontece no getServerSideProps. Usamos o "revalidade" para definir a cada quantos segundos será criado um novo cache da página com os dados atualizados
 
 //BlurHash = mostra um blur da imagem enquanto a imagem original (mais pesada) está sendo carregada.
+
+//Link from 'next/link' = Esse componenete pode ser utilizado por volta da âncora. O link normal carrega toda a página, o Link do next segue a SPA, ele mantém o que já era carregado (layout, etc...) e só faz as novas requisições necessárias para a outra página
