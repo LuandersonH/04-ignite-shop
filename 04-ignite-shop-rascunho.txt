@@ -3,12 +3,14 @@
 //SSG - Static Site Generation: As páginas são geradas estaticamente no build e a cada intervalo de tempo definido, ficam como html/css/js puros.
 
 
+//BlurHash = mostra um blur da imagem enquanto a imagem original (mais pesada) está sendo carregada.
+//Link from 'next/link' = Esse componenete pode ser utilizado por volta da âncora. O link normal carrega toda a página, o Link do next segue a SPA, ele mantém o que já era carregado (layout, etc...) e só faz as novas requisições necessárias para a outra página
+
+
 //getServerSideProps = renderizar algo no lado do servidor node.js. A pág. só será carregada assim que todas as requisições feitas no getServerSideProps finalizarem, até então, nada será carregado no front.
 
 //GetStaticProps = Cria uma versão estática (cache) da página, cria o cache para que não sejam feitas requisições toda vez que o usuário acessar a página, por exemplo, igual ao que acontece no getServerSideProps. Usamos o "revalidade" para definir a cada quantos segundos será criado um novo cache da página com os dados atualizados
 
-//BlurHash = mostra um blur da imagem enquanto a imagem original (mais pesada) está sendo carregada.
-
-//Link from 'next/link' = Esse componenete pode ser utilizado por volta da âncora. O link normal carrega toda a página, o Link do next segue a SPA, ele mantém o que já era carregado (layout, etc...) e só faz as novas requisições necessárias para a outra página
-
 //Pages parametrizadas que possuem parâmetros e ainda sim querem ser estáticas (SSG), assim como '[id].ts': devemos usar além do GetStaticProps, o getStaticPaths, ele é obrigatório para quando tenho essa situação - definimos quais são os parametros que queremos usar para gerar a versão estática da página
+//getStaticPaths
+//No build, o Next.js usa os parâmetros definidos em paths para executar o getStaticProps e gerar uma página estática para cada ID informado. Se houver muitos produtos, como dezenas de milhares, listar todos manualmente seria inviável e deixaria o build muito demorado. Com fallback: false, qualquer rota fora da lista resulta em erro 404. Já com fallback: true, o Next tenta gerar a página sob demanda com base no ID da URL. Como o HTML é carregado antes dos dados, isso pode causar erro ao acessar informações ainda não disponíveis, como product.name. Por isso, usamos isFallback do useRouter() para exibir um loading até que os dados sejam carregados e a página renderizada corretamente.
