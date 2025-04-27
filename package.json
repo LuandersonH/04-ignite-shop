@@ -11,6 +11,7 @@
   "dependencies": {
     "@stitches/react": "^1.2.8",
     "04-ignite-shop": "file:",
+    "axios": "^1.9.0",
     "keen-slider": "^6.8.6",
     "next": "15.3.1",
     "react": "^19.0.0",

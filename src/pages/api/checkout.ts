@@ -6,9 +6,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const priceID = "price_1RG7624Ta9Tnroq9xKdubjrT";
+  const { priceId } = req.body;
+
+  if (req.method != "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  if (!priceId) {
+    return res.status(400).json({ error: "Price not found." });
+  }
+
   const sucessURL = `${process.env.NEXT_URL}/success`;
-  const cancelURL = `${process.env.NEXT_URL}/`;
+  const cancelURL = `${process.env.NEXT_URL}`;
 
   const checkoutSession = await stripe.checkout.sessions.create({
     cancel_url: cancelURL,
@@ -17,7 +26,7 @@ export default async function handler(
     mode: "payment",
     line_items: [
       {
-        price: priceID,
+        price: priceId,
         quantity: 1,
       },
     ],
