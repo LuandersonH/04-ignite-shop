@@ -16,10 +16,14 @@ export const HomeContainer = styled("div", {
   },
 });
 
+export const HomeContaine2r = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+});
+
 export const Product = styled("div", {
   background: "linear-gradient(180deg, #1ea483 0%, #7465d4 100%)",
   borderRadius: 8,
-  //   padding: "0.25rem",
   cursor: "pointer",
   position: "relative",
   display: "flex",
@@ -37,6 +41,7 @@ export const Product = styled("div", {
     left: "0.25rem",
     right: "0.25rem",
     padding: "2rem",
+    gap: "1rem",
 
     borderRadius: 6,
 
@@ -49,6 +54,30 @@ export const Product = styled("div", {
     transform: "translateY(110%)",
     opacity: 0,
     transition: "all 0.2s ease-in-out",
+
+    div: {
+      display: "flex",
+      flexDirection: "column",
+
+      div: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "3.5rem",
+        height: "3.5rem",
+        backgroundColor: "$green500",
+        padding: "0.75rem",
+        borderRadius: 6,
+
+        svg: {
+          color: "$white",
+        },
+
+        "&:hover": {
+          backgroundColor: "$green300",
+        },
+      },
+    },
 
     strong: {
       fontSize: "$lg",

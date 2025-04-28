@@ -20,11 +20,14 @@ export const Header = styled("header", {
   justifyContent: "space-between",
 
   div: {
-    width: 42,
-    height: 42,
-    backgroundColor: "$gray200",
+    width: "3rem",
+    height: "3rem",
+    padding: 12,
+    borderRadius: 6,
+    backgroundColor: "$gray800",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    cursor: "pointer",
   },
 });

@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
           style={{ cursor: "pointer" }}
         />
         <div>
-          <Handbag size={24} cursor="pointer" />
+          <Handbag size={24} weight="bold" color="#8D8D99" />
         </div>
       </Header>
       <Component {...pageProps} />

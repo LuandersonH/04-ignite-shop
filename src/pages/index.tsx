@@ -11,6 +11,7 @@ import { HomeContainer, Product } from "../styles/pages/home";
 
 import Stripe from "stripe";
 import React, { useState } from "react";
+import { Handbag } from "@phosphor-icons/react";
 
 interface HomeProps {
   products: {
@@ -50,7 +51,7 @@ export default function Home({ products }: HomeProps) {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [loaded, setLoaded] = useState(false);
   // useKeenSlider<HTMLDivElement>
-  const [sliderRef, instanceRef] = useKeenSlider({
+  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     slides: { perView: 3, spacing: 48 },
     initial: 0,
     slideChanged(slider) {
@@ -83,8 +84,15 @@ export default function Home({ products }: HomeProps) {
                     height={480}
                   />
                   <footer>
-                    <strong>{product.name}</strong>
-                    <span>{product.price}</span>
+                    <div>
+                      <strong>{product.name}</strong>
+                      <span>{product.price}</span>
+                    </div>
+                    <div>
+                      <div>
+                        <Handbag size={32} cursor="pointer" weight="bold" />
+                      </div>
+                    </div>
                   </footer>
                 </Product>
               </Link>
