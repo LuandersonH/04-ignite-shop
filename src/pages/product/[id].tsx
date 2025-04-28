@@ -10,6 +10,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Stripe from "stripe";
+import Head from "next/head";
 
 interface ProductProps {
   product: {
@@ -47,43 +48,56 @@ export default function Product({ product }: ProductProps) {
 
   if (isFallback) {
     return (
-      <ProductContainer>
-        <ImageContainer>
-          <Image src="" alt="Imagem da camiseta" width={520} height={480} />
-        </ImageContainer>
-        <ProductDetails>
-          <h1>...</h1>
-          <span>R$ ...</span>
+      <>
+        <Head>
+          <title> produto | Ignite Shop</title>
+        </Head>
+        <ProductContainer>
+          <ImageContainer>
+            <Image src="" alt="Imagem da camiseta" width={520} height={480} />
+          </ImageContainer>
+          <ProductDetails>
+            <h1>...</h1>
+            <span>R$ ...</span>
 
-          <p>...</p>
+            <p>...</p>
 
-          <button disabled>Comprar agora</button>
-        </ProductDetails>
-      </ProductContainer>
+            <button disabled>Comprar agora</button>
+          </ProductDetails>
+        </ProductContainer>
+      </>
     );
   }
 
   return (
-    <ProductContainer>
-      <ImageContainer>
-        <Image
-          src={product.imageUrl}
-          alt="Imagem da camiseta"
-          width={520}
-          height={480}
-        />
-      </ImageContainer>
-      <ProductDetails>
-        <h1>{product.name}</h1>
-        <span>{product.price}</span>
+    <>
+      <Head>
+        <title> {product.name} | Ignite Shop</title>
+      </Head>
+      <ProductContainer>
+        <ImageContainer>
+          <Image
+            src={product.imageUrl}
+            alt="Imagem da camiseta"
+            width={520}
+            height={480}
+          />
+        </ImageContainer>
+        <ProductDetails>
+          <h1>{product.name}</h1>
+          <span>{product.price}</span>
 
-        <p>{product.description}</p>
+          <p>{product.description}</p>
 
-        <button disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>
-          Comprar agora
-        </button>
-      </ProductDetails>
-    </ProductContainer>
+          <button
+            disabled={isCreatingCheckoutSession}
+            onClick={handleBuyProduct}
+          >
+            Comprar agora
+          </button>
+        </ProductDetails>
+      </ProductContainer>
+    </>
   );
 }
 
