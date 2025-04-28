@@ -4,6 +4,8 @@ import logoImg from "../assets/logo.svg";
 import { Container, Header } from "../styles/pages/app";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { Handbag } from "@phosphor-icons/react";
+import "../styles/pages/home-slider.css";
 
 globalStyles();
 
@@ -21,6 +23,9 @@ export default function App({ Component, pageProps }: AppProps) {
           }}
           style={{ cursor: "pointer" }}
         />
+        <div>
+          <Handbag size={24} cursor="pointer" />
+        </div>
       </Header>
       <Component {...pageProps} />
     </Container>
