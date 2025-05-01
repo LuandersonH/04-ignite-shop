@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Stripe from "stripe";
 import Head from "next/head";
+import { useShoppingCart } from "use-shopping-cart";
 
 interface ProductProps {
   product: {
@@ -18,6 +19,7 @@ interface ProductProps {
     name: string;
     imageUrl: string;
     price: string;
+    formattedPrice: string;
     description: string;
     defaultPriceId: string;
   };
@@ -27,17 +29,20 @@ export default function Product({ product }: ProductProps) {
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
     useState(false);
 
-  async function handleBuyProduct() {
+  const { addItem } = useShoppingCart();
+
+  async function handleAddToCart() {
     try {
       setIsCreatingCheckoutSession(true);
 
-      const response = await axios.post("/api/checkout", {
-        priceId: product.defaultPriceId,
+      addItem({
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        price: Number(product.price.replace(/[^\d]/g, "")),
+        currency: "BRL",
+        image: product.imageUrl,
       });
-
-      const { checkoutUrl } = response.data;
-
-      window.location.href = checkoutUrl;
     } catch {
       setIsCreatingCheckoutSession(false);
       alert("Falha ao redirecionar ao checkout");
@@ -85,13 +90,13 @@ export default function Product({ product }: ProductProps) {
         </ImageContainer>
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>{product.price}</span>
+          <span>{product.formattedPrice}</span>
 
           <p>{product.description}</p>
 
           <button
             disabled={isCreatingCheckoutSession}
-            onClick={handleBuyProduct}
+            onClick={handleAddToCart}
           >
             Comprar agora
           </button>
@@ -126,7 +131,8 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
         id: product.id,
         name: product.name,
         imageUrl: product.images[0],
-        price: new Intl.NumberFormat("pt-br", {
+        price: price.unit_amount,
+        formattedPrice: new Intl.NumberFormat("pt-br", {
           style: "currency",
           currency: "BRL",
         }).format(price.unit_amount! / 100),
