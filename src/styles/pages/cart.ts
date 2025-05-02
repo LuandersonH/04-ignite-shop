@@ -6,7 +6,7 @@ export const CartContainer = styled("div", {
   position: "absolute",
   top: 0,
   right: 0,
-  padding: "1.5rem",
+  padding: "3rem",
 
   display: "flex",
   flexDirection: "column",
@@ -41,6 +41,7 @@ export const ProductInsideList = styled("div", {
   alignItems: "center",
   justifyContent: "center",
   gap: "1.25rem",
+  height: 95,
 
   div: {
     width: "100%",
@@ -57,5 +58,47 @@ export const ProductInsideList = styled("div", {
       color: "$green500",
       fontWeight: "bold",
     },
+  },
+});
+
+export const FooterElement = styled("footer", {
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  marginTop: "auto",
+  div: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
+  "div span:last-child": {
+    fontSize: "$lg",
+  },
+
+  "div strong": {
+    fontSize: "$lg",
+  },
+
+  "div strong:last-child": {
+    fontSize: "$xl",
+  },
+});
+
+export const BuyButton = styled("button", {
+  width: "100%",
+  height: 70,
+  marginTop: "3.5625rem",
+  color: "$white",
+  fontSize: "lg",
+  fontWeight: "bold",
+  backgroundColor: "$green300",
+  borderRadius: 8,
+  border: "none",
+  cursor: "pointer",
+
+  "&:hover": {
+    backgroundColor: "$green500",
   },
 });

@@ -4,11 +4,9 @@ import {
   ProductContainer,
   ProductDetails,
 } from "@/src/styles/pages/product";
-import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import Stripe from "stripe";
 import Head from "next/head";
 import { useShoppingCart } from "use-shopping-cart";
@@ -18,7 +16,7 @@ interface ProductProps {
     id: string;
     name: string;
     imageUrl: string;
-    price: string;
+    price: number;
     formattedPrice: string;
     description: string;
     defaultPriceId: string;
@@ -26,26 +24,20 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
-    useState(false);
-
   const { addItem } = useShoppingCart();
 
   async function handleAddToCart() {
     try {
-      setIsCreatingCheckoutSession(true);
-
       addItem({
         id: product.id,
         name: product.name,
         description: product.description,
-        price: Number(product.price.replace(/[^\d]/g, "")),
+        price: product.price,
         currency: "BRL",
         image: product.imageUrl,
       });
     } catch {
-      setIsCreatingCheckoutSession(false);
-      alert("Falha ao redirecionar ao checkout");
+      alert("Falha ao adicionar item ao carrinho");
     }
   }
 
@@ -94,12 +86,7 @@ export default function Product({ product }: ProductProps) {
 
           <p>{product.description}</p>
 
-          <button
-            disabled={isCreatingCheckoutSession}
-            onClick={handleAddToCart}
-          >
-            Comprar agora
-          </button>
+          <button onClick={handleAddToCart}>Comprar agora</button>
         </ProductDetails>
       </ProductContainer>
     </>

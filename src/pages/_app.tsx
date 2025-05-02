@@ -8,6 +8,7 @@ import { Handbag } from "@phosphor-icons/react";
 import "../styles/pages/home-slider.css";
 import { CartProvider } from "use-shopping-cart";
 import { useState } from "react";
+import Cart from "../components/cart";
 
 globalStyles();
 
@@ -37,16 +38,14 @@ export default function App({ Component, pageProps }: AppProps) {
             }}
             style={{ cursor: "pointer" }}
           />
-          <div>
-            <Handbag
-              size={24}
-              weight="bold"
-              color="#8D8D99"
-              onClick={() => handleChangeCartVisible}
-            />
+          <div onClick={handleChangeCartVisible}>
+            <Handbag size={24} weight="bold" color="#8D8D99" />
           </div>
         </Header>
         <Component {...pageProps} />
+        {cartIsVisible && (
+          <Cart handleChangeCartVisible={handleChangeCartVisible} />
+        )}
       </Container>
     </CartProvider>
   );
