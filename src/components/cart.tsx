@@ -63,7 +63,7 @@ export default function Cart({ handleChangeCartVisible }: CartProps) {
                 height={95}
               />
               <div>
-                <p>{product.name} </p>
+                <p>{product.name}</p>
                 <strong>
                   {new Intl.NumberFormat("pt-BR", {
                     style: "currency",

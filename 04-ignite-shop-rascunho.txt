@@ -18,3 +18,5 @@
 //O prefetch no Link do Next.js carrega antecipadamente a página de destino assim que o link aparece na tela, melhorando a velocidade da navegação. Isso acontece automaticamente em produção. Se usarmos prefetch={false}, o carregamento antecipado só acontece quando o usuário passa o mouse sobre o link (hover).
 
 //API routes no Next.js: são rotas de back-end criadas dentro do próprio projeto front-end. Elas são úteis quando não existe um back-end separado ou quando é preciso executar algo no servidor de forma específica para o app web, sem impactar outras plataformas como o mobile. Um exemplo seria uma autenticação com o Google, que faz sentido apenas no contexto do app web e poderia atrapalhar se estivesse na API principal usada por todas as plataformas. É server-side, em 'src/api/...' Podemos fazer acesso ao banco, usar secret keys, etc... 
+
+//Stitches (o sistema de estilização CSS-in-JS) para estilização

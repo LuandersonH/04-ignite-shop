@@ -59,7 +59,7 @@ export default function Product({ product }: ProductProps) {
 
             <p>...</p>
 
-            <button disabled>Comprar agora</button>
+            <button disabled>Adicionar ao carrinho</button>
           </ProductDetails>
         </ProductContainer>
       </>
@@ -86,7 +86,7 @@ export default function Product({ product }: ProductProps) {
 
           <p>{product.description}</p>
 
-          <button onClick={handleAddToCart}>Comprar agora</button>
+          <button onClick={handleAddToCart}>Adicionar ao carrinho</button>
         </ProductDetails>
       </ProductContainer>
     </>
