@@ -19,7 +19,7 @@ export default function Success({ customerName, product }: SucessProps) {
     <>
       <Head>
         <title>Compra Efetuada | Ignite Shop</title>
-        {/* não indexar essa página, de acordo com o meta abaixo */}
+        {/* bots não indexarão essa página, de acordo com o meta abaixo */}
         <meta name="robots" content="noindex" />
       </Head>
       <SuccessContainer>
