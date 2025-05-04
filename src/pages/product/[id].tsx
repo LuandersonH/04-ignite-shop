@@ -85,9 +85,7 @@ export default function Product({ product }: ProductProps) {
           <h1>{product.name}</h1>
           <span>{product.formattedPrice}</span>
 
-          <p>
-            {product.description} O ID É: {product.price_id}
-          </p>
+          <p>{product.description}</p>
 
           <button onClick={handleAddToCart}>Adicionar ao carrinho</button>
         </ProductDetails>

@@ -69,7 +69,7 @@ export default function Cart({ handleChangeCartVisible }: CartProps) {
                     style: "currency",
                     currency: "BRL",
                   }).format(product.price / 100)}{" "}
-                  x {product.price_id} x {product.quantity}
+                  x {product.quantity}
                 </strong>
                 <button onClick={() => removeItem(product.id)}>Remover</button>
               </div>
