@@ -1,20 +1,36 @@
 import Link from "next/link";
-import { ImageContainer, SuccessContainer } from "../styles/pages/sucess";
+import {
+  CircularImage,
+  ImageContainer,
+  SuccessContainer,
+} from "../styles/pages/sucess";
 import { GetServerSideProps } from "next";
 import { stripe } from "../lib/stripe";
 import Stripe from "stripe";
 import Image from "next/image";
 import Head from "next/head";
 
-interface SucessProps {
+interface SuccessProps {
   customerName: string;
-  product: {
+  products: {
     name: string;
     imageUrl: string;
-  };
+    id: string;
+  }[];
+  totalQuantity: number;
 }
 
-export default function Success({ customerName, product }: SucessProps) {
+export default function Success({
+  customerName,
+  products,
+  totalQuantity,
+}: SuccessProps) {
+  // Remover produtos duplicados por id, para que cada camiseta seja exibida uma única vez
+  const uniqueProducts = products.filter(
+    (product, index, self) =>
+      index === self.findIndex((p) => p.id === product.id)
+  );
+
   return (
     <>
       <Head>
@@ -24,16 +40,22 @@ export default function Success({ customerName, product }: SucessProps) {
       </Head>
       <SuccessContainer>
         <h1>Compra efetuada!</h1>
-
         <ImageContainer>
-          <Image src={product.imageUrl} width={120} height={110} alt=""></Image>
+          {/* o slice faz com que no máximo 6 camisetas diferentes sejam exibidas, para a estilização se manter. */}
+          {uniqueProducts.slice(0, 6).map((item) => {
+            return (
+              <CircularImage key={item.id}>
+                <Image src={item.imageUrl} width={120} height={110} alt="" />
+              </CircularImage>
+            );
+          })}
         </ImageContainer>
-
         <p>
-          Uhuul <strong>{customerName}</strong>, sua{" "}
-          <strong>{product.name}</strong> já está a caminha da sua casa.
+          Uhuul <strong>{customerName}</strong>, sua compra de{" "}
+          <strong>{totalQuantity}</strong>{" "}
+          {totalQuantity === 1 ? "camiseta" : "camisetas"} já está a caminho da
+          sua casa.
         </p>
-
         <Link href="/">Voltar ao catálogo</Link>
       </SuccessContainer>
     </>
@@ -57,19 +79,27 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   });
 
   const customerName = session.customer_details?.name;
-
-  const product = session.line_items?.data[0].price?.product as Stripe.Product;
+  const totalQuantity = session.line_items?.data.reduce(
+    (acc, item) => acc + (item.quantity ?? 0),
+    0
+  );
+  const products = session.line_items?.data.map((item) => {
+    const product = item.price?.product as Stripe.Product;
+    return {
+      name: product.name,
+      imageUrl: product.images[0],
+      id: product.id,
+    };
+  });
 
   console.log(customerName);
-  console.log(product);
+  console.log(products);
 
   return {
     props: {
       customerName,
-      product: {
-        name: product.name,
-        imageUrl: product.images[0],
-      },
+      products,
+      totalQuantity,
     },
   };
 };

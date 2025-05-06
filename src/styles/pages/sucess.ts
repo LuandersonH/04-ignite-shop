@@ -37,16 +37,38 @@ export const SuccessContainer = styled("div", {
 });
 export const ImageContainer = styled("div", {
   width: "100%",
-  maxWidth: 130,
+  maxWidth: 640,
   height: 145,
-  background: "linear-gradient(180deg, #1ea483 0%, #7465d4 100%)",
+  background: "$gray900",
   borderRadius: 8,
   paddig: "0.25rem",
   marginTop: "4rem",
+  // position: "relative",
 
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+});
+
+export const CircularImage = styled("div", {
+  width: "100%",
+  maxWidth: 140,
+  height: 140,
+  background: "linear-gradient(180deg, #1ea483 0%, #7465d4 100%)",
+  borderRadius: 99,
+  // position: "absolute",
+  // transform: "translate(50%, -50%)",
+  // right: 0,
+  // top: 0,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  boxShadow: "0 0 60px black",
+  marginLeft: "-35px",
+
+  "&:first-child": {
+    marginLeft: "0",
+  },
 
   img: {
     objectFit: "cover",
